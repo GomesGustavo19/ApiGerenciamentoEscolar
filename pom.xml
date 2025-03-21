@@ -9,10 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gomes</groupId>
-	<artifactId>controle-notas</artifactId>
+	<artifactId>ApiGerenciamentoEscolar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>controle-notas</name>
-	<description>Treinamento prático de java spring security com JWT, serão implementadas rotas para adicionar notas, nota final, crud de aluno, crud funcionários, onde os mesmos terão permissão para determinada função dentro da escola.</description>
+	<name>ApiGerenciamentoEscolar</name>
+	<description>
+		Treinamento prático de java spring security com JWT,
+		serão implementadas rotas para adicionar notas, nota final, crud de aluno, crud funcionários,
+		onde os mesmos terão permissão para determinada função dentro da escola.
+	</description>
 	<url/>
 	<licenses>
 		<license/>

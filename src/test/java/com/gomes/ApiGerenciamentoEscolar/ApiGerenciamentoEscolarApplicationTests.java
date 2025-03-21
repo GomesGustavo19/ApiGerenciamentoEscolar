@@ -1,10 +1,10 @@
-package com.gomes.controle_notas;
+package com.gomes.ApiGerenciamentoEscolar;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ControleNotasApplicationTests {
+class ApiGerenciamentoEscolarApplicationTests {
 
 	@Test
 	void contextLoads() {
