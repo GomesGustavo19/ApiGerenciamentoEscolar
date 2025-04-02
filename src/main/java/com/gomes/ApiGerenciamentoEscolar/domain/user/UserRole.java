@@ -2,10 +2,10 @@ package com.gomes.ApiGerenciamentoEscolar.domain.user;
 
 public enum UserRole {
 
-    DIRETOR("role_diretor"),
-    SECRETARIO("role_secretario"),
-    PROFESSOR("role_professor"),
-    ALUNO("role_aluno");
+    DIRETOR("diretor"),
+    SECRETARIO("secretario"),
+    PROFESSOR("professor"),
+    ALUNO("aluno");
 
     private String role;
 
@@ -14,6 +14,6 @@ public enum UserRole {
     }
 
     public String getRole(){
-        return this.role;
+        return role;
     }
 }

@@ -1,21 +1,19 @@
 package com.gomes.ApiGerenciamentoEscolar.infra.security;
 
-import com.gomes.ApiGerenciamentoEscolar.repository.UserRepository;
+import com.gomes.ApiGerenciamentoEscolar.domain.user.Users;
+import com.gomes.ApiGerenciamentoEscolar.repository.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
+
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -24,8 +22,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private UserRepository userRepository;
-
+    private UsersRepository usersRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -34,8 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var subject = tokenService.validateToken(token);
 
         if (token != null){
-
-            UserDetails login = userRepository.findByEmail(subject);
+            Users login = (Users) usersRepository.findByEmail(subject);
 
             var authencation = new UsernamePasswordAuthenticationToken(login, null, login.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authencation);

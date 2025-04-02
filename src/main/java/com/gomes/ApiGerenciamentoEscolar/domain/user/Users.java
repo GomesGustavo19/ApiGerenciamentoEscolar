@@ -1,7 +1,6 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.user;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -68,15 +67,15 @@ public class Users implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        if (this.getRole() == UserRole.DIRETOR) return List.of(new SimpleGrantedAuthority("role_diretor"),
-                new SimpleGrantedAuthority("role_professor"),
-                new SimpleGrantedAuthority("role_aluno"));
-        else if (this.getRole() == UserRole.SECRETARIO) return  List.of(new SimpleGrantedAuthority("role_secretario"),
-                new SimpleGrantedAuthority("role_aluno"),
-                new SimpleGrantedAuthority( "role_professor"));
-        else if (this.getRole() == UserRole.PROFESSOR) return List.of(new SimpleGrantedAuthority("role_professor"),
-                new SimpleGrantedAuthority("role_aluno"));
-        else return List.of(new SimpleGrantedAuthority("role_aluno"));
+        if (this.getRole() == UserRole.DIRETOR) return List.of(new SimpleGrantedAuthority("ROLE_DIRETOR"),
+                new SimpleGrantedAuthority("ROLE_PROFESSOR"),
+                new SimpleGrantedAuthority("ROLE_ALUNO"));
+        else if (this.getRole() == UserRole.SECRETARIO) return  List.of(new SimpleGrantedAuthority("ROLE_SECRETARIO"),
+                new SimpleGrantedAuthority("ROLE_ALUNO"),
+                new SimpleGrantedAuthority( "ROLE_PROFESSOR"));
+        else if (this.getRole() == UserRole.PROFESSOR) return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"),
+                new SimpleGrantedAuthority("ROLE_ALUNO"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
 
     }
 
