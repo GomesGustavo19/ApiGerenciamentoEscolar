@@ -1,5 +1,5 @@
 CREATE TABLE professor(
-    idProfessor VARCHAR(100) PRIMARY KEY NOT NULL,
+    id_professor VARCHAR(100) PRIMARY KEY NOT NULL,
     nome VARCHAR(70),
     dataNascimento DATE,
     cpf VARCHAR(11),

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "secretario")
@@ -12,8 +11,8 @@ public class Secretario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @PrimaryKeyJoinColumn(name = "idSecretario")
-    private UUID idSecretario;
+    @Column(name = "id_secretario")
+    private String idSecretario;
     @Column(name = "nome", length = 70)
     private String nome;
     @Column(name = "cpf", length = 11)
@@ -29,11 +28,11 @@ public class Secretario {
         this.dataNascimento = dataNascimento;
     }
 
-    public UUID getIdSecretario() {
+    public String getIdSecretario() {
         return idSecretario;
     }
 
-    public void setIdSecretario(UUID idSecretario) {
+    public void setIdSecretario(String idSecretario) {
         this.idSecretario = idSecretario;
     }
 

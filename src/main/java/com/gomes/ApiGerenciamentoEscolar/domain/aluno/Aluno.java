@@ -12,7 +12,7 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @PrimaryKeyJoinColumn(name = "idAluno")
+    @Column(name = "id_aluno", length = 100)
     private UUID idAluno;
     @Column(name = "nome" , length = 70)
     private String nome;

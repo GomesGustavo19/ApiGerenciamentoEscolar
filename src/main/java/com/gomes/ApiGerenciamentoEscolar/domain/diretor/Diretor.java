@@ -3,7 +3,6 @@ package com.gomes.ApiGerenciamentoEscolar.domain.diretor;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.UUID;
 
 
 @Entity
@@ -12,8 +11,8 @@ public class Diretor{
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "idDiretor", length = 100)
-    private UUID idDiretor;
+    @Column(name = "id_diretor", length = 100)
+    private String idDiretor;
 
     @Column(name = "nome", length = 70)
     private String nome;
@@ -38,11 +37,11 @@ public class Diretor{
         this.registroDiretor = registroDiretor;
     }
 
-    public UUID getIdDiretor() {
+    public String getIdDiretor() {
         return idDiretor;
     }
 
-    public void setIdDiretor(UUID idDiretor) {
+    public void setIdDiretor(String idDiretor) {
         this.idDiretor = idDiretor;
     }
 

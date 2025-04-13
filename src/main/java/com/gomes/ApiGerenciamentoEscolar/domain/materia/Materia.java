@@ -11,22 +11,25 @@ public class Materia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @PrimaryKeyJoinColumn(name = "idmateria")
+    @Column(name = "id_materia", unique = true)
     private UUID idMateria;
 
-    @Column(name = "nome",length = 50)
+    @Column(name = "nome", length = 50)
     private String nome;
 
     @Column(name = "nota")
     private Double nota;
 
-    @Column(name = "notafinal")
+    @Column(name = "nota_final")
     private Double notaFinal;
 
-    public Materia() {}
+    public Materia() {
+    }
 
-    public Materia(String nome) {
+    public Materia(String nome, Double nota, Double notaFinal) {
         this.nome = nome;
+        this.nota = nota;
+        this.notaFinal = notaFinal;
     }
 
     public UUID getIdMateria() {

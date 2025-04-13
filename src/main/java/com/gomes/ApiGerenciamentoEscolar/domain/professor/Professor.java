@@ -1,5 +1,6 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.professor;
 
+import com.gomes.ApiGerenciamentoEscolar.domain.materia.Materia;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @PrimaryKeyJoinColumn(name = "idProfessor")
+    @Column(name = "id_professor", length = 100)
     private UUID idProfessor;
     @Column(name = "nome", length = 70)
     private String nome;
@@ -22,14 +23,17 @@ public class Professor {
     private String cpf;
     @Column(name = "registroprofessor", length = 5)
     private String registroProfessor;
-    @Column(name = "materiaLecionada", length = 30)
-    private String materiaLecionada;
+
+    @ManyToOne
+    @JoinColumn(name = "id_materia", referencedColumnName = "id_materia")
+    private Materia materiaLecionada;
+
     @Column(name = "nivelEscolar", length = 2)
     private NivelEscolar nivelEscolar;
 
     public Professor() {}
 
-    public Professor(String nome, Date dataNascimento, String cpf, String registroProfessor, String materiaLecionada, NivelEscolar nivelEscolar) {
+    public Professor(String nome, Date dataNascimento, String cpf, String registroProfessor, Materia materiaLecionada, NivelEscolar nivelEscolar) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -78,11 +82,11 @@ public class Professor {
         this.registroProfessor = registroProfessor;
     }
 
-    public String getMateriaLecionada() {
+    public Materia getMateriaLecionada() {
         return materiaLecionada;
     }
 
-    public void setMateriaLecionada(String materiaLecionada) {
+    public void setMateriaLecionada(Materia materiaLecionada) {
         this.materiaLecionada = materiaLecionada;
     }
 
