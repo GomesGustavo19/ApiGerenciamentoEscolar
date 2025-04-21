@@ -58,13 +58,21 @@ Secretário
 
     POST seretaria/secretarios: Cadastrar secretário.
 
-    POST seretaria/professores: Cadastrar professores.
+    POST seretaria/cadastrarprofessore: Cadastrar professores.
 
-    POST seretaria/alunos: Cadastrar alunos.
+    GET seretaria/pesquisarProfessore: Pesquisar professores.
 
+    PUT seretaria/atualizarProfessore: Atualizar Professores
+
+    POST seretaria/cadastrarAluno: Cadastrar alunos.
+
+    GET seretaria/pesquisarAluno: Pesquisar alunos.
+    
+    PUT seretaria/atualizarAluno: Atualizar alunos.
+    
     POST seretaria/materias: Cadastrar matérias.
 
-    POST seretaria/vinculos: Vincular aluno, professor e matéria.
+    POST seretaria/turma: Vincular aluno, professor e matéria.
 
 Professor
 

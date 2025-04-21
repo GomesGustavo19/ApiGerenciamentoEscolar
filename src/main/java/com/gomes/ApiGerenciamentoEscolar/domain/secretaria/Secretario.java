@@ -1,4 +1,4 @@
-package com.gomes.ApiGerenciamentoEscolar.domain.secretario;
+package com.gomes.ApiGerenciamentoEscolar.domain.secretaria;
 
 import jakarta.persistence.*;
 
