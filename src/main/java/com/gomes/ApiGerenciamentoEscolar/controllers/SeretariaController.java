@@ -2,6 +2,7 @@ package com.gomes.ApiGerenciamentoEscolar.controllers;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.aluno.CreateStudentDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.aluno.FinByStudentDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestUpdateStudent;
 import com.gomes.ApiGerenciamentoEscolar.services.AlunoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class SeretariaController {
         return alunoService.findByStudent(finByStudentDTO.cpf());
     }
 
-    @GetMapping("/list")
-    private ResponseEntity findByAllStudent(){
-        return alunoService.finByAllStudent();
+    @PutMapping("/atualizarAluno")
+    private ResponseEntity updatedStudent(@RequestBody @Valid RequestUpdateStudent requestUpdateStudent){
+        return alunoService.updateStudent(requestUpdateStudent);
     }
 
 }

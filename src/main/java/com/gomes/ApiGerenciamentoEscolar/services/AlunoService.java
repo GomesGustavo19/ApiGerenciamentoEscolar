@@ -2,14 +2,13 @@ package com.gomes.ApiGerenciamentoEscolar.services;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.aluno.Aluno;
 import com.gomes.ApiGerenciamentoEscolar.domain.aluno.CreateStudentDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestUpdateStudent;
 import com.gomes.ApiGerenciamentoEscolar.exception.StudentExistException;
 import com.gomes.ApiGerenciamentoEscolar.exception.StudentNotExistException;
 import com.gomes.ApiGerenciamentoEscolar.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AlunoService {
@@ -49,11 +48,20 @@ public class AlunoService {
 
     }
 
-    public ResponseEntity<List<Aluno>> finByAllStudent() {
+    public ResponseEntity updateStudent(RequestUpdateStudent requestUpdateStudent) {
 
-        List<Aluno> listStudent = alunoRepository.findAll();
+        Aluno findByStudent = alunoRepository.findByCpf(requestUpdateStudent.cpf()).get();
 
-        return ResponseEntity.ok().body(listStudent);
+        if (findByStudent.getNome().isEmpty()){
+            throw new StudentNotExistException();
+        }
+
+        Aluno updatedRegistration = new Aluno(requestUpdateStudent.nome(),
+                requestUpdateStudent.dataNascimento(), requestUpdateStudent.cpf());
+        alunoRepository.saveAndFlush(updatedRegistration);
+
+        return ResponseEntity.ok().build();
+
     }
 
 }
