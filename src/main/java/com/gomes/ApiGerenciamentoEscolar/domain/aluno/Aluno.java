@@ -1,9 +1,6 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.aluno;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.Objects;
@@ -34,6 +31,7 @@ public class Aluno {
         this.datanascimento = datanascimento;
         this.cpf = cpf;
     }
+
 
     public UUID getIdAluno() {
         return idAluno;

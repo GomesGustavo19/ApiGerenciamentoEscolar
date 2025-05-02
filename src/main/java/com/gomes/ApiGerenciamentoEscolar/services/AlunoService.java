@@ -1,12 +1,11 @@
 package com.gomes.ApiGerenciamentoEscolar.services;
 
-import com.gomes.ApiGerenciamentoEscolar.domain.aluno.Aluno;
-import com.gomes.ApiGerenciamentoEscolar.domain.aluno.CreateStudentDTO;
-import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestUpdateStudent;
+import com.gomes.ApiGerenciamentoEscolar.domain.aluno.*;
 import com.gomes.ApiGerenciamentoEscolar.exception.StudentExistException;
 import com.gomes.ApiGerenciamentoEscolar.exception.StudentNotExistException;
 import com.gomes.ApiGerenciamentoEscolar.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,51 +16,48 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    public ResponseEntity createStudent(CreateStudentDTO createStudentDTO) {
+    public ResponseEntity createStudent(RequestCreateStudentDTO requestCreateStudentDTO) {
 
-
-        if (alunoRepository.findByCpf(createStudentDTO.cpf()).isPresent()) {
-            throw new StudentExistException();
+        if (alunoRepository.findByCpf(requestCreateStudentDTO.cpf()).isPresent()) {
+            throw new StudentExistException("Student with " +  requestCreateStudentDTO.cpf() +  " already registered ");
         }
 
-        Aluno newAluno = new Aluno(createStudentDTO.nome(), createStudentDTO.dataNascimento(), createStudentDTO.cpf());
+        Aluno newAluno = new Aluno(requestCreateStudentDTO.nome() ,requestCreateStudentDTO.dataNascimento()
+                ,requestCreateStudentDTO.cpf());
 
         alunoRepository.save(newAluno);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(HttpStatus.CREATED);
 
 
     }
 
-    public ResponseEntity<Aluno> findByStudent(String cpf) {
+    public ResponseEntity<ResponseStudentDTO> existingStudent(RequestFinByStudentDTO requestFinByStudentDTO) {
 
-        //Correcao do handler campitando exception errada, porem ainda funcionar
+        Aluno studentFound = alunoRepository.findByCpf(requestFinByStudentDTO.cpf())
+                .orElseThrow(()-> new StudentNotExistException("Student with " + requestFinByStudentDTO.cpf() + " not found"));
 
-        Aluno findBy = alunoRepository.findByCpf(cpf).get();
+        ResponseStudentDTO responseStudentDTO = new ResponseStudentDTO(studentFound.getNome(),studentFound.getCpf(),studentFound.getDatanascimento());
 
-        if (findBy.getNome().isEmpty()){
-            //para que a valida funcionar corretament, e necessario validar a obrigatoriedade dos campos no bd
-            throw new StudentNotExistException();
-        }
-
-        return ResponseEntity.ok(findBy);
+        return ResponseEntity.ok(responseStudentDTO);
 
     }
 
-    public ResponseEntity updateStudent(RequestUpdateStudent requestUpdateStudent) {
+    public ResponseEntity<ResponseStudentDTO> updateStudent(RequestUpdateStudent requestUpdateStudent) {
 
-        Aluno findByStudent = alunoRepository.findByCpf(requestUpdateStudent.cpf()).get();
+        Aluno findByStudent = alunoRepository.findByCpf(requestUpdateStudent.cpf())
+                .orElseThrow(()-> new StudentNotExistException("Student with " + requestUpdateStudent.cpf() + " not found"));
 
-        if (findByStudent.getNome().isEmpty()){
-            throw new StudentNotExistException();
-        }
+        findByStudent.setNome(requestUpdateStudent.nome());
+        findByStudent.setDatanascimento(requestUpdateStudent.dataNascimento());
+        findByStudent.setCpf(requestUpdateStudent.cpf());
 
-        Aluno updatedRegistration = new Aluno(requestUpdateStudent.nome(),
-                requestUpdateStudent.dataNascimento(), requestUpdateStudent.cpf());
-        alunoRepository.saveAndFlush(updatedRegistration);
+        Aluno saveUpdateStudent = alunoRepository.save(findByStudent);
 
-        return ResponseEntity.ok().build();
+        ResponseStudentDTO responseStudentDTO = new ResponseStudentDTO(saveUpdateStudent.getNome(),
+                saveUpdateStudent.getCpf(), saveUpdateStudent.getDatanascimento());
+
+        return ResponseEntity.ok(responseStudentDTO);
 
     }
-
 }

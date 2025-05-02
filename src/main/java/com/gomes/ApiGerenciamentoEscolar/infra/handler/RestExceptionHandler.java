@@ -15,8 +15,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(StudentExistException.class)
     private ResponseEntity<RestErrorMenssage> studentExistHandler(StudentExistException studentExistException){
-        RestErrorMenssage treatResponse = new RestErrorMenssage(HttpStatus.FOUND,studentExistException.getMessage());
-        return ResponseEntity.status(HttpStatus.FOUND).body(treatResponse);
+        RestErrorMenssage treatResponse = new RestErrorMenssage(HttpStatus.valueOf(400),studentExistException.getMessage());
+        return ResponseEntity.status(HttpStatus.valueOf(400)).body(treatResponse);
     }
 
     @ExceptionHandler(StudentNotExistException.class)

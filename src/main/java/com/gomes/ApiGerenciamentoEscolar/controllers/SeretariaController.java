@@ -1,7 +1,7 @@
 package com.gomes.ApiGerenciamentoEscolar.controllers;
 
-import com.gomes.ApiGerenciamentoEscolar.domain.aluno.CreateStudentDTO;
-import com.gomes.ApiGerenciamentoEscolar.domain.aluno.FinByStudentDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestCreateStudentDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestFinByStudentDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.aluno.RequestUpdateStudent;
 import com.gomes.ApiGerenciamentoEscolar.services.AlunoService;
 import jakarta.validation.Valid;
@@ -18,15 +18,15 @@ public class SeretariaController {
 
 
     @PostMapping("/cadastrarAluno")
-    private ResponseEntity createStudent(@RequestBody @Valid CreateStudentDTO createStudentDTO) {
+    private ResponseEntity createStudent(@RequestBody @Valid RequestCreateStudentDTO requestCreateStudentDTO) {
 
-        return alunoService.createStudent(createStudentDTO);
+        return alunoService.createStudent(requestCreateStudentDTO);
 
     }
 
     @GetMapping("/pesquisarAluno")
-    private ResponseEntity findByStudent(@RequestBody @Valid FinByStudentDTO finByStudentDTO){
-        return alunoService.findByStudent(finByStudentDTO.cpf());
+    private ResponseEntity findByStudent(@RequestBody @Valid RequestFinByStudentDTO requestFinByStudentDTO){
+        return alunoService.existingStudent (requestFinByStudentDTO);
     }
 
     @PutMapping("/atualizarAluno")

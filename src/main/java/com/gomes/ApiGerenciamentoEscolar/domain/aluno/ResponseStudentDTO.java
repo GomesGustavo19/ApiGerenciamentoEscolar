@@ -4,4 +4,4 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-public record RequestUpdateStudent(String nome, Date dataNascimento, @NotNull String cpf) { }
+public record ResponseStudentDTO(@NotNull String nome, @NotNull String cpf, @NotNull Date dataNascimento) {}
