@@ -27,12 +27,12 @@ public class AlunoService {
 
         alunoRepository.save(newAluno);
 
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
 
     }
 
-    public ResponseEntity<ResponseStudentDTO> existingStudent(RequestFinByStudentDTO requestFinByStudentDTO) {
+    public ResponseEntity<ResponseStudentDTO> findByStudent(RequestFinByStudentDTO requestFinByStudentDTO) {
 
         Aluno studentFound = alunoRepository.findByCpf(requestFinByStudentDTO.cpf())
                 .orElseThrow(()-> new StudentNotExistException("Student with " + requestFinByStudentDTO.cpf() + " not found"));
@@ -45,14 +45,14 @@ public class AlunoService {
 
     public ResponseEntity<ResponseStudentDTO> updateStudent(RequestUpdateStudent requestUpdateStudent) {
 
-        Aluno findByStudent = alunoRepository.findByCpf(requestUpdateStudent.cpf())
+        Aluno existingStudent = alunoRepository.findByCpf(requestUpdateStudent.cpf())
                 .orElseThrow(()-> new StudentNotExistException("Student with " + requestUpdateStudent.cpf() + " not found"));
 
-        findByStudent.setNome(requestUpdateStudent.nome());
-        findByStudent.setDatanascimento(requestUpdateStudent.dataNascimento());
-        findByStudent.setCpf(requestUpdateStudent.cpf());
+        existingStudent.setNome(requestUpdateStudent.nome());
+        existingStudent.setDatanascimento(requestUpdateStudent.dataNascimento());
+        existingStudent.setCpf(requestUpdateStudent.cpf());
 
-        Aluno saveUpdateStudent = alunoRepository.save(findByStudent);
+        Aluno saveUpdateStudent = alunoRepository.save(existingStudent);
 
         ResponseStudentDTO responseStudentDTO = new ResponseStudentDTO(saveUpdateStudent.getNome(),
                 saveUpdateStudent.getCpf(), saveUpdateStudent.getDatanascimento());

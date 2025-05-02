@@ -26,7 +26,7 @@ public class SeretariaController {
 
     @GetMapping("/pesquisarAluno")
     private ResponseEntity findByStudent(@RequestBody @Valid RequestFinByStudentDTO requestFinByStudentDTO){
-        return alunoService.existingStudent (requestFinByStudentDTO);
+        return alunoService.findByStudent(requestFinByStudentDTO);
     }
 
     @PutMapping("/atualizarAluno")
