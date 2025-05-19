@@ -1,0 +1,4 @@
+CREATE TABLE matter (
+    id_matter VARCHAR(100) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);

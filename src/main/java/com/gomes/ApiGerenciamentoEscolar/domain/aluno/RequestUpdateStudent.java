@@ -1,7 +1,0 @@
-package com.gomes.ApiGerenciamentoEscolar.domain.aluno;
-
-import jakarta.validation.constraints.NotNull;
-
-import java.util.Date;
-
-public record RequestUpdateStudent(String nome, Date dataNascimento, @NotNull String cpf) { }

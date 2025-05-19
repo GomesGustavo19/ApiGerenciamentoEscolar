@@ -72,7 +72,7 @@ Secretário
     
     POST seretaria/materias: Cadastrar matérias.
 
-    POST seretaria/turma: Vincular aluno, professor e matéria.
+    POST seretaria/turma: Vincular student, professor e matéria.
 
 Professor
 

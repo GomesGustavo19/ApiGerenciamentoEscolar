@@ -1,9 +1,10 @@
 package com.gomes.ApiGerenciamentoEscolar.repository;
 
-import com.gomes.ApiGerenciamentoEscolar.domain.diretor.Diretor;
+import com.gomes.ApiGerenciamentoEscolar.domain.matter.Matter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface DiretorRepository extends JpaRepository<Diretor, String> {
-}
+public interface MatterRepository extends JpaRepository<Matter, UUID> { }
