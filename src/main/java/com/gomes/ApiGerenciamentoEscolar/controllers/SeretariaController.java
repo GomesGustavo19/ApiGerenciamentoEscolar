@@ -24,7 +24,7 @@ public class SeretariaController {
     @PostMapping("/cadastrarAluno")
     private ResponseEntity<ResponseStudentDTO> createStudent(@RequestBody @Valid RequestCreateStudentDTO requestCreateStudentDTO) {
 
-        Student createStudente = studentService.createStudent(requestCreateStudentDTO).getBody();
+        Student createStudente = studentService.create(requestCreateStudentDTO).getBody();
 
         return ResponseEntity.ok().build();
     }
@@ -41,7 +41,7 @@ public class SeretariaController {
     @PutMapping("/atualizarAluno")
     private ResponseEntity updatedStudent(@RequestBody @Valid RequestUpdateStudent requestUpdateStudent){
 
-        return studentService.updateStudent(requestUpdateStudent);
+        return studentService.update(requestUpdateStudent);
     }
 
     @PostMapping("/list")

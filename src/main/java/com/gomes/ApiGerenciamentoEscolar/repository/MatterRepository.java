@@ -7,4 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface MatterRepository extends JpaRepository<Matter, UUID> { }
+public interface MatterRepository extends JpaRepository<Matter, String> { }

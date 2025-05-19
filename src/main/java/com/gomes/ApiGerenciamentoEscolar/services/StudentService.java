@@ -23,7 +23,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public ResponseEntity<Student> createStudent(RequestCreateStudentDTO requestCreateStudentDTO) {
+    public ResponseEntity<Student> create(RequestCreateStudentDTO requestCreateStudentDTO) {
 
         if (studentRepository.findByCpf(requestCreateStudentDTO.cpf()).isPresent()) {
             throw new StudentExistException("Student with " + requestCreateStudentDTO.cpf() + " already registered ");
@@ -48,7 +48,7 @@ public class StudentService {
     }
 
     @Transactional
-    public ResponseEntity<Student> updateStudent(RequestUpdateStudent requestUpdateStudent) {
+    public ResponseEntity<Student> update(RequestUpdateStudent requestUpdateStudent) {
 
 
         Optional<Student> existingStudent = studentRepository.findById(requestUpdateStudent.id_student());
