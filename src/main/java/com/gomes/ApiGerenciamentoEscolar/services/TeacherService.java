@@ -2,7 +2,7 @@ package com.gomes.ApiGerenciamentoEscolar.services;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.RequestCreateTeacher;
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.Teacher;
-import com.gomes.ApiGerenciamentoEscolar.exception.StudentExistException;
+import com.gomes.ApiGerenciamentoEscolar.exception.PersonExistException;
 import com.gomes.ApiGerenciamentoEscolar.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class TeacherService {
         Optional<Teacher> existing = teacherRepository.findByCpf(requestCreateTeacher.cpf());
 
         if (existing.isPresent()){
-            throw new StudentExistException("Teacher with " + requestCreateTeacher.cpf()
+            throw new PersonExistException("Teacher with " + requestCreateTeacher.cpf()
                     + " already registered");
         }
 

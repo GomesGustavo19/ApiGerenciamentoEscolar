@@ -16,8 +16,9 @@ public class Matter {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_matter", unique = true)
     private String idMatter;
-
     @Column(name = "name", length = 50)
     private String name;
+    @Version
+    private Long version;
 
 }
