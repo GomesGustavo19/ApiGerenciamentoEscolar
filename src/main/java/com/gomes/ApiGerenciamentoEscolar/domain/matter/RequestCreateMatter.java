@@ -1,4 +1,6 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.matter;
 
-public record RequestCreateMatter(String name) {
+import jakarta.validation.constraints.NotBlank;
+
+public record RequestCreateMatter(@NotBlank String name) {
 }

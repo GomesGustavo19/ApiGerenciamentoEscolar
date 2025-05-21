@@ -1,4 +1,7 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.matter;
 
-public record RequestFindByMatter(String id, String name) {
+import jakarta.validation.constraints.NotBlank;
+
+public record RequestFindByMatter(@NotBlank(message = "Mandatory field id") String id,
+                                  @NotBlank(message = "Mandatory field name") String name) {
 }

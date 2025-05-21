@@ -20,7 +20,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_teacher", length = 100)
     private String idTeacher;
-    @Column(name = "nome", length = 70)
+    @Column(name = "name", length = 70)
     private String name;
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "datebirth")
@@ -34,8 +34,11 @@ public class Teacher {
     private Matter matter;
     @Column(name = "materialtaught", length = 2)
     private MaterialTaught materialTaught;
+    @Version
+    private Long version;
 
-    public Teacher(String name, String dateBirth, String cpf, String registerTeacher, Matter matter, MaterialTaught materialTaught) {
+    public Teacher(String name, String dateBirth, String cpf, String registerTeacher, Matter matter
+            ,MaterialTaught materialTaught) {
         this.name = name;
         this.dateBirth = dateBirth;
         this.cpf = cpf;
