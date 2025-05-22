@@ -63,6 +63,8 @@ Secretário
     GET seretaria/teacher: Pesquisar professores.
 
     PUT seretaria/teacher: Atualizar Professores
+    
+    DELETE seretaria/teacher: Deletar Professores
 
     POST seretaria/student: Cadastrar alunos.
 
