@@ -36,6 +36,9 @@ public class StudentAssessment {
     @Column(name = "grade_third")
     private Double grandeThird;
 
+    @Column(name= "final_grade")
+    private Double finalGrade;
+
     @Column(name = "absences")
     private Integer absences;
 
@@ -45,13 +48,14 @@ public class StudentAssessment {
     @Version
     private Long version;
 
-    public StudentAssessment(ClassRoom fkClassroom, Student fkStudent, Double grandeFirst,
-                             Double grandeSecond, Double grandeThird, Integer absences, String academicYear) {
+    public StudentAssessment(ClassRoom fkClassroom, Student fkStudent, Double grandeFirst, Double grandeSecond,
+                             Double grandeThird, Double finalGrade, Integer absences, String academicYear) {
         this.fkClassroom = fkClassroom;
         this.fkStudent = fkStudent;
         this.grandeFirst = grandeFirst;
         this.grandeSecond = grandeSecond;
         this.grandeThird = grandeThird;
+        this.finalGrade = finalGrade;
         this.absences = absences;
         this.academicYear = academicYear;
     }
