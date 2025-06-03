@@ -4,20 +4,20 @@ import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ClassRoom;
 import com.gomes.ApiGerenciamentoEscolar.domain.matter.Matter;
 import com.gomes.ApiGerenciamentoEscolar.domain.student.Student;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "student_assessment")
 @Getter
 @Setter
-@EqualsAndHashCode(of = "idStudentAssement")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idStudentAssessment")
 public class StudentAssessment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String idStudentAssement;
+    private String idStudentAssessment;
 
     @ManyToOne
     @JoinColumn(name = "id_classroom")
@@ -26,10 +26,6 @@ public class StudentAssessment {
     @ManyToOne
     @JoinColumn(name = "id_student")
     private Student fkStudent;
-
-    @ManyToOne
-    @JoinColumn(name = "id_matter")
-    private Matter fkMatter;
 
     @Column(name = "grade_first")
     private Double grandeFirst;
@@ -48,4 +44,15 @@ public class StudentAssessment {
 
     @Version
     private Long version;
+
+    public StudentAssessment(ClassRoom fkClassroom, Student fkStudent, Double grandeFirst,
+                             Double grandeSecond, Double grandeThird, Integer absences, String academicYear) {
+        this.fkClassroom = fkClassroom;
+        this.fkStudent = fkStudent;
+        this.grandeFirst = grandeFirst;
+        this.grandeSecond = grandeSecond;
+        this.grandeThird = grandeThird;
+        this.absences = absences;
+        this.academicYear = academicYear;
+    }
 }

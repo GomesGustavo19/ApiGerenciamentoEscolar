@@ -1,11 +1,8 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.classroom;
 
-import com.gomes.ApiGerenciamentoEscolar.domain.assessment.StudentAssessment;
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.Teacher;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "classroom")
@@ -24,9 +21,6 @@ public class ClassRoom {
     @ManyToOne
     @JoinColumn(name = "id_teacher")
     private Teacher fkTeacher;
-
-    @OneToMany(mappedBy = "fkClassroom", cascade = CascadeType.ALL)
-    private List<StudentAssessment> assessments;
 
     @Column(name = "classDescription")
     private String classDescription;

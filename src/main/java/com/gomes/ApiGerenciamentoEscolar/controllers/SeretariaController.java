@@ -1,12 +1,16 @@
 package com.gomes.ApiGerenciamentoEscolar.controllers;
 
+import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ResponseUpdateClassroomDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestClassRoomDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestUpdateClassRoomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.matter.Matter;
-import com.gomes.ApiGerenciamentoEscolar.domain.matter.ResponseMatterDto;
 import com.gomes.ApiGerenciamentoEscolar.domain.matter.RequestCreateMatter;
 import com.gomes.ApiGerenciamentoEscolar.domain.matter.RequestFindByMatter;
+import com.gomes.ApiGerenciamentoEscolar.domain.matter.ResponseMatterDto;
 import com.gomes.ApiGerenciamentoEscolar.domain.student.*;
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.*;
 import com.gomes.ApiGerenciamentoEscolar.repository.StudentRepository;
+import com.gomes.ApiGerenciamentoEscolar.services.ClassRoomService;
 import com.gomes.ApiGerenciamentoEscolar.services.MatterService;
 import com.gomes.ApiGerenciamentoEscolar.services.StudentService;
 import com.gomes.ApiGerenciamentoEscolar.services.TeacherService;
@@ -33,18 +37,21 @@ public class SeretariaController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private ClassRoomService classRoomService;
+
 
     @PostMapping("/student")
     private ResponseEntity<ResponseStudentDTO> createStudent(@RequestBody @Valid RequestCreateStudentDTO requestCreateStudentDTO) {
 
-        Student createStudente = studentService.create(requestCreateStudentDTO).getBody();
+        var createStudente = studentService.create(requestCreateStudentDTO).getBody();
 
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/student")
     private ResponseEntity<ResponseStudentDTO> findByStudent(@RequestBody @Valid RequestFinByStudentDTO requestFinByStudentDTO){
-        Student existingStudent = studentService.findByStudent(requestFinByStudentDTO).getBody();
+        var existingStudent = studentService.findByStudent(requestFinByStudentDTO).getBody();
 
         ResponseStudentDTO responseStudentDTO = new ResponseStudentDTO(existingStudent);
 
@@ -54,7 +61,7 @@ public class SeretariaController {
     @PutMapping("/student")
     private ResponseEntity<ResponseStudentDTO> updatedStudent(@RequestBody @Valid RequestUpdateStudent requestUpdateStudent){
 
-        Student update = studentService.update(requestUpdateStudent).getBody();
+        var update = studentService.update(requestUpdateStudent).getBody();
 
         ResponseStudentDTO responseStudentDTO = new ResponseStudentDTO(update);
 
@@ -71,7 +78,7 @@ public class SeretariaController {
     @PostMapping("/matter")
     private ResponseEntity<Matter> createMatter(@RequestBody @Valid RequestCreateMatter requestCreateMatter){
 
-        Matter saveMatter = matterService.create(requestCreateMatter).getBody();
+        var saveMatter = matterService.create(requestCreateMatter).getBody();
 
         return ResponseEntity.ok().build();
 
@@ -80,7 +87,7 @@ public class SeretariaController {
     @PutMapping("/matter")
     private ResponseEntity<ResponseMatterDto> updateMatter(@RequestBody @Valid RequestFindByMatter requestFindByMatter){
 
-        Matter update = matterService.update(requestFindByMatter).getBody();
+        var update = matterService.update(requestFindByMatter).getBody();
 
         ResponseMatterDto matterResponse = new ResponseMatterDto(update);
 
@@ -91,7 +98,7 @@ public class SeretariaController {
     @PostMapping("/teacher")
     private ResponseEntity<ResponseStudentDTO> createTeacher(@RequestBody @Valid RequestCreateTeacher requestCreateTeacher){
 
-        Teacher save = teacherService.create(requestCreateTeacher).getBody();
+        var save = teacherService.create(requestCreateTeacher).getBody();
 
         return ResponseEntity.ok().build();
     }
@@ -99,7 +106,7 @@ public class SeretariaController {
     @GetMapping("/teacher")
     private ResponseEntity<ResponseTeacherDto> findByTeacher(@RequestBody @Valid RequestFindByTeacher requestFindByTeacher){
 
-        Teacher findByTeacher = teacherService.findByTeacher(requestFindByTeacher).getBody();
+        var findByTeacher = teacherService.findByTeacher(requestFindByTeacher).getBody();
 
         ResponseTeacherDto dto = new ResponseTeacherDto(findByTeacher);
 
@@ -110,7 +117,7 @@ public class SeretariaController {
     @PutMapping("/teacher")
     private ResponseEntity<ResponseTeacherDto> updateTeacher(@RequestBody @Valid RequestUpdateTeacher requestUpdateTeacher){
 
-        Teacher update = teacherService.update(requestUpdateTeacher).getBody();
+        var update = teacherService.update(requestUpdateTeacher).getBody();
 
         ResponseTeacherDto dto = new ResponseTeacherDto(update);
 
@@ -125,5 +132,22 @@ public class SeretariaController {
 
     }
 
+    @GetMapping("/classroom")
+    private ResponseEntity createClassRoom(@RequestBody @Valid RequestClassRoomDTO requestClassRoomDTO){
+
+        var create = classRoomService.create(requestClassRoomDTO).getBody();
+
+        return ResponseEntity.ok().build();
+
+    }
+
+    @PutMapping("/classroom")
+    private ResponseEntity<ResponseUpdateClassroomDTO> updateClassRoom(@RequestBody @Valid RequestUpdateClassRoomDTO requestUpdateClassRoomDTO){
+
+        var update = classRoomService.update(requestUpdateClassRoomDTO).getBody();
+
+        return ResponseEntity.ok(update);
+
+    }
 
 }
