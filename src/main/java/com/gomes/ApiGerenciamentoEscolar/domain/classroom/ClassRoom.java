@@ -20,16 +20,16 @@ public class ClassRoom {
 
     @ManyToOne
     @JoinColumn(name = "id_teacher")
-    private Teacher fkTeacher;
+    private Teacher teacher;
 
-    @Column(name = "classDescription")
+    @Column(name = "class_description")
     private String classDescription;
 
     @Version
     private Long version;
 
-    public ClassRoom(Teacher fkTeacher, String classDescription) {
-        this.fkTeacher = fkTeacher;
+    public ClassRoom(Teacher teacher, String classDescription) {
+        this.teacher = teacher;
         this.classDescription = classDescription;
     }
 }

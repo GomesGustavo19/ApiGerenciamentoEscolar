@@ -1,7 +1,6 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.assessment;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ClassRoom;
-import com.gomes.ApiGerenciamentoEscolar.domain.matter.Matter;
 import com.gomes.ApiGerenciamentoEscolar.domain.student.Student;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,24 +16,25 @@ public class StudentAssessment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private String idStudentAssessment;
 
     @ManyToOne
     @JoinColumn(name = "id_classroom")
-    private ClassRoom fkClassroom;
+    private ClassRoom classroom;
 
     @ManyToOne
     @JoinColumn(name = "id_student")
-    private Student fkStudent;
+    private Student student;
 
     @Column(name = "grade_first")
-    private Double grandeFirst;
+    private Double gradeFirst;
 
     @Column(name = "grade_second")
-    private Double grandeSecond;
+    private Double gradeSecond;
 
     @Column(name = "grade_third")
-    private Double grandeThird;
+    private Double gradeThird;
 
     @Column(name= "final_grade")
     private Double finalGrade;
@@ -48,15 +48,20 @@ public class StudentAssessment {
     @Version
     private Long version;
 
-    public StudentAssessment(ClassRoom fkClassroom, Student fkStudent, Double grandeFirst, Double grandeSecond,
-                             Double grandeThird, Double finalGrade, Integer absences, String academicYear) {
-        this.fkClassroom = fkClassroom;
-        this.fkStudent = fkStudent;
-        this.grandeFirst = grandeFirst;
-        this.grandeSecond = grandeSecond;
-        this.grandeThird = grandeThird;
+    public StudentAssessment(ClassRoom classroom, Student student, Double gradeFirst, Double gradeSecond,
+                             Double gradeThird, Double finalGrade, Integer absences, String academicYear) {
+        this.classroom = classroom;
+        this.student = student;
+        this.gradeFirst = gradeFirst;
+        this.gradeSecond = gradeSecond;
+        this.gradeThird = gradeThird;
         this.finalGrade = finalGrade;
         this.absences = absences;
         this.academicYear = academicYear;
+    }
+
+    public StudentAssessment(ClassRoom classroom, Student student) {
+        this.classroom = classroom;
+        this.student = student;
     }
 }

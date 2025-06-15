@@ -64,14 +64,14 @@ public class ClassRoomService {
 
         var classRoom = optionalClassRoom.get();
 
-        classRoom.setFkTeacher(optionalTeacher.get());
+        classRoom.setTeacher(optionalTeacher.get());
         classRoom.setClassDescription(requestUpdateClassRoom.classdescription());
 
         ClassRoom update = classRoomRepository.save(classRoom);
 
-        ResponseUpdateClassroomDTO responseUpdateClassroomDTO = new ResponseUpdateClassroomDTO(update.getFkTeacher().getName(),
-                update.getFkTeacher().getRegisterTeacher(),update.getFkTeacher().getMatter().getName(),
-                update.getFkTeacher().getMaterialTaught(), update.getClassDescription());
+        ResponseUpdateClassroomDTO responseUpdateClassroomDTO = new ResponseUpdateClassroomDTO(update.getTeacher().getName(),
+                update.getTeacher().getRegisterTeacher(),update.getTeacher().getMatter().getName(),
+                update.getTeacher().getMaterialTaught(), update.getClassDescription());
 
 
         return ResponseEntity.ok(responseUpdateClassroomDTO);

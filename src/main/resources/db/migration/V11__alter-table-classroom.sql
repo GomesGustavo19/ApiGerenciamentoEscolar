@@ -1,0 +1,1 @@
+ALTER TABLE classroom ADD COLUMN id_teacher varchar(100);

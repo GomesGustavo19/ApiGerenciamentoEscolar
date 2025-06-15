@@ -56,8 +56,6 @@ Diretor
 
 Secretário
 
-    POST seretaria/secretarios: Cadastrar secretário.
-
     POST seretaria/teacher: Cadastrar professores.
 
     GET seretaria/teacher: Pesquisar professores.
@@ -76,7 +74,7 @@ Secretário
 
     PUT secretaria/matter: Atualizar Matter
 
-    POST seretaria/turma: Vincular student, professor e matéria.
+    POST seretaria/class: Vincular classroom, student.
 
 Professor
 

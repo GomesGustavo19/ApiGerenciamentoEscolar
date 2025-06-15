@@ -1,5 +1,7 @@
 package com.gomes.ApiGerenciamentoEscolar.controllers;
 
+import com.gomes.ApiGerenciamentoEscolar.domain.assessment.RequestCreateStudentAssessmentDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.assessment.RequestUpdateStudentAssessment;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ResponseUpdateClassroomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestClassRoomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestUpdateClassRoomDTO;
@@ -10,10 +12,7 @@ import com.gomes.ApiGerenciamentoEscolar.domain.matter.ResponseMatterDto;
 import com.gomes.ApiGerenciamentoEscolar.domain.student.*;
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.*;
 import com.gomes.ApiGerenciamentoEscolar.repository.StudentRepository;
-import com.gomes.ApiGerenciamentoEscolar.services.ClassRoomService;
-import com.gomes.ApiGerenciamentoEscolar.services.MatterService;
-import com.gomes.ApiGerenciamentoEscolar.services.StudentService;
-import com.gomes.ApiGerenciamentoEscolar.services.TeacherService;
+import com.gomes.ApiGerenciamentoEscolar.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +38,9 @@ public class SeretariaController {
 
     @Autowired
     private ClassRoomService classRoomService;
+
+    @Autowired
+    private StudentAssessmentService studentAssessmentService;
 
 
     @PostMapping("/student")
@@ -132,7 +134,7 @@ public class SeretariaController {
 
     }
 
-    @GetMapping("/classroom")
+    @PostMapping("/classroom")
     private ResponseEntity createClassRoom(@RequestBody @Valid RequestClassRoomDTO requestClassRoomDTO){
 
         var create = classRoomService.create(requestClassRoomDTO).getBody();
@@ -147,7 +149,21 @@ public class SeretariaController {
         var update = classRoomService.update(requestUpdateClassRoomDTO).getBody();
 
         return ResponseEntity.ok(update);
+    }
 
+    @PostMapping("/class")
+    private ResponseEntity createClass(@RequestBody @Valid RequestCreateStudentAssessmentDTO requestCreateStudentAssessmentDTO){
+
+        var create = studentAssessmentService.create(requestCreateStudentAssessmentDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/class")
+    private ResponseEntity updateClass(@RequestBody @Valid RequestUpdateStudentAssessment requestUpdateStudentAssessment){
+        var update = studentAssessmentService.update(requestUpdateStudentAssessment);
+
+        return ResponseEntity.ok(update);
     }
 
 }

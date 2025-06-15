@@ -1,5 +1,5 @@
 CREATE TABLE student_assessment (
-    id VARCHAR(100) PRIMARY KEY NOT NULL,
+    id VARCHAR(100) NOT NULL PRIMARY KEY,
     fk_classroom VARCHAR(100) NOT NULL,
     fk_student VARCHAR(100) NOT NULL,
     grade_first DOUBLE,

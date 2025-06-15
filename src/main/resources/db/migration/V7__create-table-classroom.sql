@@ -3,5 +3,5 @@ CREATE TABLE classroom(
     fk_teacher varchar(2),
     fk_student varchar(2),
     fk_matter varchar(2),
-    classDescription varchar(255)
+    class_description varchar(255)
 );
