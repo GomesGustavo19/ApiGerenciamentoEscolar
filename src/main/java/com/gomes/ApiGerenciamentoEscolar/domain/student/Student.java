@@ -1,11 +1,12 @@
 package com.gomes.ApiGerenciamentoEscolar.domain.student;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gomes.ApiGerenciamentoEscolar.domain.assessment.StudentAssessment;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -28,6 +29,8 @@ public class Student {
     @CPF
     @Column(name = "cpf" , length = 11)
     private String cpf;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<StudentAssessment> assessments;
     @Version
     private Long version;
 

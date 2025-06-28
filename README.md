@@ -80,15 +80,11 @@ Professor
 
     POST /professores/notas: Cadastrar notas.
 
-    POST /professores/faltas: Cadastrar faltas.
-
-    POST /professores/aulas: Cadastrar descrição da aula.
+    POST /professores/faltas: Cadastrar faltas e descrição da aula.
 
 Aluno
 
-    GET /alunos/notas: Consultar notas.
-
-    GET /alunos/materias: Consultar matérias vinculadas.
+    GET /student/assessment: Consultar matérias e notas.
 
 Autenticação
 

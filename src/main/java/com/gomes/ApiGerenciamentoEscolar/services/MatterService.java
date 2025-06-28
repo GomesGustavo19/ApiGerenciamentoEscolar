@@ -17,19 +17,19 @@ public class MatterService {
     @Autowired
     private MatterRepository matterRepository;
 
-    public ResponseEntity<Matter> create(RequestCreateMatter requestCreateMatter){
+    public Matter create(RequestCreateMatter requestCreateMatter){
 
         Matter matter = new Matter();
         matter.setName(requestCreateMatter.name());
 
         matterRepository.save(matter);
 
-        return ResponseEntity.ok().build();
+        return matter;
 
     }
 
     @Transactional
-    public ResponseEntity<Matter> update(RequestFindByMatter requestMatter ){
+    public Matter update(RequestFindByMatter requestMatter ){
 
         Optional<Matter> existing = matterRepository.findById(requestMatter.id());
 
@@ -40,7 +40,7 @@ public class MatterService {
 
             matterRepository.save(getOptional);
 
-            return ResponseEntity.ok(getOptional);
+            return getOptional;
         }else {
             throw new RuntimeException("Matter not found");
         }

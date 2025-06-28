@@ -23,7 +23,7 @@ public class TeacherService {
     private MatterRepository matterRepository;
 
     @Transactional
-    public ResponseEntity<Teacher> create(RequestCreateTeacher requestCreateTeacher){
+    public Teacher create(RequestCreateTeacher requestCreateTeacher){
 
         Optional<Teacher> existingTeacher = teacherRepository.findByCpf(requestCreateTeacher.cpf());
 
@@ -44,10 +44,10 @@ public class TeacherService {
 
         teacherRepository.save(data);
 
-        return ResponseEntity.ok().build();
+        return data;
     }
 
-    public ResponseEntity<Teacher> findByTeacher(RequestFindByTeacher requestFindByTeacher){
+    public Teacher findByTeacher(RequestFindByTeacher requestFindByTeacher){
 
         Optional<Teacher> optionalTeacher = teacherRepository.findByCpf(requestFindByTeacher.cpf());
 
@@ -58,12 +58,12 @@ public class TeacherService {
 
         var teacher = optionalTeacher.get();
 
-        return ResponseEntity.ok(teacher);
+        return teacher;
 
     }
 
     @Transactional
-    public ResponseEntity<Teacher> update(RequestUpdateTeacher requestUpdateTeacher){
+    public Teacher update(RequestUpdateTeacher requestUpdateTeacher){
 
         Optional<Teacher> optionalTeacher = teacherRepository.findById(requestUpdateTeacher.id());
 
@@ -88,12 +88,11 @@ public class TeacherService {
 
         teacherRepository.save(teacher);
 
-        return ResponseEntity.ok(teacher);
+        return teacher;
 
     }
 
     public ResponseEntity<Teacher> delete(RequestDeleteTeacher requestDeleteTeacher){
-
 
         teacherRepository.deleteById(requestDeleteTeacher.id());
 

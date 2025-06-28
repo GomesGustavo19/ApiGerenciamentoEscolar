@@ -11,4 +11,6 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 
     Optional<Student> findByCpf(String cpf);
 
+
+
 }

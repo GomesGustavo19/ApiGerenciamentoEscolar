@@ -1,16 +1,15 @@
 package com.gomes.ApiGerenciamentoEscolar.services;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ClassRoom;
-import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ResponseUpdateClassroomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestClassRoomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.RequestUpdateClassRoomDTO;
+import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ResponseUpdateClassroomDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.teacher.Teacher;
 import com.gomes.ApiGerenciamentoEscolar.exception.PersonNotExistException;
 import com.gomes.ApiGerenciamentoEscolar.repository.ClassRoomRepository;
 import com.gomes.ApiGerenciamentoEscolar.repository.StudentAssessmentRepository;
 import com.gomes.ApiGerenciamentoEscolar.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +28,7 @@ public class ClassRoomService {
     private StudentAssessmentRepository studentAssessmentRepository;
 
     @Transactional
-    public ResponseEntity<ClassRoom> create(RequestClassRoomDTO requestCreateClassRoomDTO) {
+    public ClassRoom create(RequestClassRoomDTO requestCreateClassRoomDTO) {
 
         Optional<Teacher> optionalTeacher = teacherRepository.findById(requestCreateClassRoomDTO.teacher());
 
@@ -43,11 +42,11 @@ public class ClassRoomService {
 
         classRoomRepository.save(saveClassRoom);
 
-        return ResponseEntity.ok().build();
+        return saveClassRoom;
     }
 
     @Transactional
-    public ResponseEntity<ResponseUpdateClassroomDTO> update(RequestUpdateClassRoomDTO requestUpdateClassRoom){
+    public ResponseUpdateClassroomDTO update(RequestUpdateClassRoomDTO requestUpdateClassRoom){
 
         Optional<ClassRoom> optionalClassRoom = classRoomRepository.findById(requestUpdateClassRoom.id());
 
@@ -74,7 +73,7 @@ public class ClassRoomService {
                 update.getTeacher().getMaterialTaught(), update.getClassDescription());
 
 
-        return ResponseEntity.ok(responseUpdateClassroomDTO);
+        return responseUpdateClassroomDTO;
 
     }
 

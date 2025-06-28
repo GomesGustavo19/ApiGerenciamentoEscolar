@@ -1,7 +1,7 @@
 package com.gomes.ApiGerenciamentoEscolar.services;
 
 import com.gomes.ApiGerenciamentoEscolar.domain.assessment.RequestCreateStudentAssessmentDTO;
-import com.gomes.ApiGerenciamentoEscolar.domain.assessment.RequestUpdateStudentAssessment;
+import com.gomes.ApiGerenciamentoEscolar.domain.assessment.RequestUpdateStudentAssessmentDTO;
 import com.gomes.ApiGerenciamentoEscolar.domain.assessment.StudentAssessment;
 import com.gomes.ApiGerenciamentoEscolar.domain.classroom.ClassRoom;
 import com.gomes.ApiGerenciamentoEscolar.domain.student.Student;
@@ -56,32 +56,32 @@ public class StudentAssessmentService {
     }
 
     @Transactional
-    public ResponseEntity<StudentAssessment> update(RequestUpdateStudentAssessment requestUpdateStudentAssessment){
+    public ResponseEntity<StudentAssessment> update(RequestUpdateStudentAssessmentDTO requestUpdateStudentAssessmentDTO){
 
-        Optional<StudentAssessment> optionalStudentAssessment = studentAssessmentRepository.findById(requestUpdateStudentAssessment.id());
+        Optional<StudentAssessment> optionalStudentAssessment = studentAssessmentRepository.findById(requestUpdateStudentAssessmentDTO.id());
         if (optionalStudentAssessment.isEmpty())
             throw new RuntimeException("Student Assessment not found");
 
-        Optional<Student> optionalStudent = studentRepository.findByCpf(requestUpdateStudentAssessment.documentStudent());
+        Optional<Student> optionalStudent = studentRepository.findByCpf(requestUpdateStudentAssessmentDTO.documentStudent());
         if (optionalStudent.isEmpty())
-            throw new PersonNotExistException("Student with " + requestUpdateStudentAssessment.documentStudent() + " not exist");
+            throw new PersonNotExistException("Student with " + requestUpdateStudentAssessmentDTO.documentStudent() + " not exist");
 
-        Optional<ClassRoom> optionalClassRoom = classRoomRepository.findById(requestUpdateStudentAssessment.classroom());
+        Optional<ClassRoom> optionalClassRoom = classRoomRepository.findById(requestUpdateStudentAssessmentDTO.classroom());
         if (optionalClassRoom.isEmpty())
             throw new RuntimeException("Classroom not found");
 
-        var calculateFinalGrade = calculateFinalGrade(requestUpdateStudentAssessment.gradeFirst(),
-                requestUpdateStudentAssessment.gradeSecond(), requestUpdateStudentAssessment.gradeThird());
+        var calculateFinalGrade = calculateFinalGrade(requestUpdateStudentAssessmentDTO.gradeFirst(),
+                requestUpdateStudentAssessmentDTO.gradeSecond(), requestUpdateStudentAssessmentDTO.gradeThird());
 
         var updateStudentAssessment = optionalStudentAssessment.get();
         updateStudentAssessment.setClassroom(optionalClassRoom.get());
         updateStudentAssessment.setStudent(optionalStudent.get());
-        updateStudentAssessment.setGradeFirst(requestUpdateStudentAssessment.gradeFirst());
-        updateStudentAssessment.setGradeSecond(requestUpdateStudentAssessment.gradeSecond());
-        updateStudentAssessment.setGradeThird(requestUpdateStudentAssessment.gradeThird());
+        updateStudentAssessment.setGradeFirst(requestUpdateStudentAssessmentDTO.gradeFirst());
+        updateStudentAssessment.setGradeSecond(requestUpdateStudentAssessmentDTO.gradeSecond());
+        updateStudentAssessment.setGradeThird(requestUpdateStudentAssessmentDTO.gradeThird());
         updateStudentAssessment.setFinalGrade(calculateFinalGrade);
-        updateStudentAssessment.setAbsences(requestUpdateStudentAssessment.absences());
-        updateStudentAssessment.setAcademicYear(requestUpdateStudentAssessment.academicYear());
+        updateStudentAssessment.setAbsences(requestUpdateStudentAssessmentDTO.absences());
+        updateStudentAssessment.setAcademicYear(requestUpdateStudentAssessmentDTO.academicYear());
 
         studentAssessmentRepository.save(updateStudentAssessment);
 
